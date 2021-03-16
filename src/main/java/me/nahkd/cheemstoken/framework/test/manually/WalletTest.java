@@ -14,10 +14,13 @@ public class WalletTest {
 		Blockchain chain = new MemoryBlockchain();
 		System.out.println(chain.verifyChain());
 		
-		WorkerBlock block = new WorkerBlock(chain.getLastBlock().getBlockHash(), System.currentTimeMillis());
-		wallet.getAddress().mineBlock(block);
-		System.out.println("Block mined");
-		System.out.println(chain.submit(block));
+		for (int i = 0; i < 10; i++) {
+			WorkerBlock block = new WorkerBlock(chain.getLastBlock().getBlockHash(), System.currentTimeMillis());
+			wallet.getAddress().mineBlock(block);
+			System.out.println("Block mined");
+			System.out.println("Submit = " + chain.submit(block));
+			System.out.println(wallet.getAddress().calculateBalance(chain) + " Cheems in balance - " + chain.getBlocksCount() + " blocks in chain");
+		}
 	}
 
 }

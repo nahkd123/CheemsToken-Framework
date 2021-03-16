@@ -12,6 +12,7 @@ import java.util.Base64;
 import me.nahkd.cheemstoken.framework.block.Block;
 import me.nahkd.cheemstoken.framework.bytestream.ByteWritableStream;
 import me.nahkd.cheemstoken.framework.bytestream.WritableStream;
+import me.nahkd.cheemstoken.framework.chain.Blockchain;
 import me.nahkd.cheemstoken.framework.utils.ByteArraysConverter;
 
 public class WalletAddress {
@@ -81,6 +82,20 @@ public class WalletAddress {
 		
 		while (!block.mineBlock()) hash++;
 		System.out.println(hash + " hashes in " + (System.currentTimeMillis() - timestamp) + "ms");
+	}
+	
+	/**
+	 * Calculate the wallet balance. This includes rewards for mining and balance changes on transactions
+	 * @param chain The blocks chain
+	 * @return
+	 */
+	public long calculateBalance(Blockchain chain) {
+		long bal = 0;
+		for (int i = 0; i < chain.getBlocksCount(); i++) {
+			Block block = chain.getBlock(i);
+			if (this.equals(block.getMinerAddress())) bal += block.reward;
+		}
+		return bal;
 	}
 	
 	@Override

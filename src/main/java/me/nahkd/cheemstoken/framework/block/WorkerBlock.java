@@ -10,7 +10,7 @@ import me.nahkd.cheemstoken.framework.bytestream.WritableStream;
 public class WorkerBlock extends Block {
 	
 	public WorkerBlock(byte[] prevHash, long timestamp) {
-		super(prevHash, timestamp, 0x01, 23, 50);
+		super(prevHash, timestamp, 0x01, 16, 50);
 	}
 	
 	@Override

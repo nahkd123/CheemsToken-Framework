@@ -47,7 +47,10 @@ public interface Blockchain {
 	default boolean submit(Block block) {
 		int diff = block.diff;
 		byte[] hash = block.getBlockHash();
-		if (DataComparator.padsAtLeastBits(hash, diff)) return true;
+		if (DataComparator.padsAtLeastBits(hash, diff)) {
+			realSubmit(block);
+			return true;
+		}
 		return false;
 	}
 	

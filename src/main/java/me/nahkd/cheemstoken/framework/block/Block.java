@@ -109,6 +109,10 @@ public abstract class Block {
 		stream.writeULEB128(magic);
 	}
 	
+	public WalletAddress getMinerAddress() {
+		return this.minerAddress;
+	}
+	
 	// Finalize
 	public byte[] getFinalBlockData() {
 		ByteWritableStream stream = new ByteWritableStream();
